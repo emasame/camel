@@ -1,0 +1,99 @@
+import random
+
+print ("""
+Welcome to Camel!
+You have stolen a camel to make your way across The Great Mobi Desert
+The natives want their camel back and are chasing you down!
+Survive across the desert and out run the natives.\n""")
+
+#variables
+milesTraveled = 0
+thirst = 0
+camelTiredness = 0
+nativeDistance = -20
+canteen = 3
+oasis = random.randrange(1,16)
+done = False
+
+while not done:
+    nativesBehind = milesTraveled - nativeDistance
+    fullSpeed = random.randrange(10, 21)
+    moderateSpeed = random.randrange(5, 13)
+    print ("""
+    A. Drink from your canteen.
+    B. Ahead moderate speed.
+    C. Ahead full speed.
+    D. Stop for the night.
+    E. Status check.
+    Q. Quit.\n""")
+
+# user input answers
+
+#quit?
+    userInput = input("Your Choice? ")
+    if userInput.upper() == "Q":
+        done = True
+        
+# status
+    elif userInput.upper() == "E":
+        print ("Miles Traveled:", milesTraveled) 
+        print ("Drinks in Canteen:", canteen)
+        print ("Your camel has", camelTiredness, "amount of fatigue")
+        print ("The natives are", nativesBehind, "miles behind you")
+        
+# stop for night
+    elif userInput.upper() == "D":
+        camelTiredness *= 0
+        nativeDistance += random.randrange(7, 15)
+        print ("Your camel woke up from a beautiful slumber and is ready to run")
+        
+# move full speed      
+    elif userInput.upper() == "C":
+        milesTraveled += random.randrange(10, 21)
+        camelTiredness += random.randrange(1,4)
+        thirst += 1
+        nativeDistance += random.randrange(7,15)
+        oasis 
+        print ("You traveled", milesTraveled, "miles")
+        
+# move moderate speed
+    elif userInput.upper() == "B":
+        milesTraveled += random.randrange(5, 13)
+        camelTiredness += 1
+        thirst += 1
+        nativeDistance += random.randrange(7,15)
+        oasis
+        print ("You traveled", milesTraveled, "miles")
+        
+# drink canteen
+    elif userInput.upper() == "A":
+        if canteen > 0:
+            canteen -= 1
+            thirst *= 0 
+            print ("You have", canteen, "drinks left in your canteen and no longer thirsty")
+        else:
+            print ("No water for you!")
+
+    if thirst >= 4 and thirst < 6 and not done:
+        print ("You are thirsty and need water!", thirst, "out of 6")
+    if thirst >= 6:
+        print ("You died of thirst! - Game over")
+        done = True
+    if camelTiredness >= 5 and camelTiredness < 8 and not done:
+        print ("Your camel is getting tired", camelTiredness, "out of 8")
+    if camelTiredness >= 8:
+        print ("Your camel is dead, you monster! - Game over")
+        done = True
+    if nativesBehind <= 15:
+        print ("The natives are getting close, they are only", nativesBehind, "miles behind you")
+    if nativeDistance >= milesTraveled:
+        print ("The natives caught you and you died - Game over")
+        done = True
+    if milesTraveled >= 200:
+        print ("You won the game!")
+        done = True
+    if oasis == 15:
+        print ("You found an Oasis! You now have a full canteen and your camel is refereshed")
+        canteen = 3
+        thirst *= 0
+        camelTiredness *= 0 
